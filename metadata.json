@@ -1,0 +1,14 @@
+{
+  "name": "n2ygk-soundmodem",
+  "version": "0.1.0",
+  "author": "n2ygk",
+  "summary": "installs and configures Soundcard Packet Radio Modem (http://gna.org/projects/soundmodem)",
+  "license": "Apache 2.0",
+  "source": "https://github.com/n2ygk/puppet-soundmodem",
+  "project_page": "https://github.com/n2ygk/puppet-soundmodem",
+  "issues_url": "https://github.com/n2ygk/puppet-soundmodem/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
