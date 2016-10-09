@@ -1,41 +1,70 @@
 # == Class: soundmodem
 #
-# Full description of class soundmodem here.
+# Install and configure Thomas Sailer's soundmodem userland driver http://gna.org/projects/soundmodem
 #
 # === Parameters
 #
 # Document parameters here.
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# [*intf*]
+#   Network interface name. Default 'sm0'
+#   
+# [*pttdev*]
+#   Push-to-talk (transmit) device. Default '/dev/ttyS0'
+#   
+# [*call*]
+#   Amateur radio AX.25 call sign.
 #
-# === Variables
+# [*audio_type*]
+#   Linux sound system. Must be 'alsa'. Placeholder for future types.
 #
-# Here you should define a list of variables that this module would require.
 #
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if
-#   it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should be avoided in favor of class parameters as
-#   of Puppet 2.6.)
+# [*alsa_dev*]
+#   ALSA device. Default 'plughw:0,0'
 #
+# [*alsa_speaker_playback_volume*]
+#   Transmit audio gain. Default 15.
+#
+# [*alsa_pcm_capture_volume*]
+#   Receive audio gain. Default 10.
+#
+# 
 # === Examples
 #
 #  class { 'soundmodem':
-#    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
+#    call                         => 'N0NE-15',
+#    alsa_speaker_playback_volume => 12,
 #  }
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Alan Crosswell <n2ygk@weca.org>
 #
 # === Copyright
 #
-# Copyright 2016 Your name here, unless otherwise noted.
+# Copyright 2016 Alan Crosswell
 #
-class soundmodem {
+class soundmodem (
+  $intf                         = $soundmodem::params::intf,
+  $pttdev                       = $soundmodem::params::pttdev,
+  $call                         = $soundmodem::params::call,
+  $audio_type                   = $soundmodem::params::audio_type,
+  $alsa_dev                     = $soundmodem::params::alsa_dev,
+  $alsa_speaker_playback_volume = $soundmodem::params::alsa_speaker_playback_volume,
+  $alsa_pcm_capture_volume      = $soundmodem::params::alsa_pcm_capture_volume,
+) inherits soundmodem::params {
+  validate_string($intf)
+  validate_absolute_path($pttdev)
+  validate_string($call)
+  validate_re($audio_type, '^alsa$', 'Only supported audio type is "alsa"')
+  validate_string($alsa_dev)
+  validate_integer($alsa_speaker_playback_volume)
+  validate_integer($alsa_pcm_capture_volume)
 
-
+  anchor { 'soundmodem::begin': } ->
+  class { '::soundmodem::install': } ->
+  class { '::soundmodem::config': } ~>
+  class { '::soundmodem::service': } ->
+  anchor { 'soundmodem::end': }
+  
 }

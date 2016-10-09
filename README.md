@@ -15,65 +15,62 @@
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+This module manages Thomas Sailer's Amateur Radio AX.25 [soundmodem](http://gna.org/projects/soundmodem)
+
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+soundmodem installs, configures and runs the soundmodem. Your system must have a sound card of some
+sort.
 
 ## Setup
 
-### What soundmodem affects
-
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
 ### Beginning with soundmodem
 
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+To use soundmodem, connect your transceiver's receive and transmit audio lines
+to your sound card (or USB sound controller), attach a serial PTT controller to 
+a tty (or USB serial adapter) port. You will need to tweak your audio levels
+based on the specifics of your transceiver and sound device.
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+```
+  class { 'soundmodem':
+    call                         => 'N0NE-15',
+    alsa_speaker_playback_volume => 12,
+  }
 
+```
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+### Parameters
+[*intf*]
+  Network interface name. Default 'sm0'
+  
+[*pttdev*]
+  Push-to-talk (transmit) device. Default '/dev/ttyS0'
+  
+[*call*]
+  Amateur radio AX.25 call sign.
+
+[*audio_type*]
+  Linux sound system. Must be 'alsa'. Placeholder for future types.
+
+[*alsa_dev*]
+  ALSA device. Default 'plughw:0,0'
+
+[*alsa_speaker_playback_volume*]
+  Transmit audio gain. Default 15.
+
+[*alsa_pcm_capture_volume*]
+  Receive audio gain. Default 10.
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+This has only been tested on x86 hardware with Fedora and CentOS with one or
+two sound cards and/or USB sound adapters.
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+Clone [here](https://github.com/n2ygk/puppet-soundmodem) and submit a PR!
 
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
