@@ -7,7 +7,7 @@
     <channel name="Channel 0">
       <mod mode="afsk" bps="1200" f0="1200" f1="2200" diffenc="1"/>
       <demod mode="afsk" bps="1200" f0="1200" f1="2200" diffdec="1"/>
-      <pkt mode="MKISS" ifname="<%= @intf -%>" hwaddr="<%= @call -%>" ip="10.0.0.1" netmask="255.255.255.0" broadcast="10.0.0.255"/>
+      <pkt mode="MKISS" ifname="<%= @intf -%>" hwaddr="<%= @callsign -%>" ip="10.0.0.1" netmask="255.255.255.0" broadcast="10.0.0.255"/>
     </channel>
   </configuration>
 </modem>

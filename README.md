@@ -36,8 +36,8 @@ based on the specifics of your transceiver and sound device.
 
 ```
   class { 'soundmodem':
-    call                         => 'N0NE-15',
-    alsa_speaker_playback_volume => 12,
+    callsign                     => 'N0NE-15',
+    alsa_speaker_playback_volume => 4000,
   }
 
 ```
@@ -50,7 +50,7 @@ based on the specifics of your transceiver and sound device.
 [*pttdev*]
   Push-to-talk (transmit) device. Default '/dev/ttyS0'
   
-[*call*]
+[*callsign*]
   Amateur radio AX.25 call sign.
 
 [*audio_type*]
