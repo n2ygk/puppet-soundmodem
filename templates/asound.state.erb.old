@@ -1,0 +1,119 @@
+state.Audio {
+	control.1 {
+		comment.access 'read write'
+		comment.type BOOLEAN
+		comment.count 1
+		iface MIXER
+		name 'Mic Playback Switch'
+		value false
+	}
+	control.2 {
+		comment.access 'read write'
+		comment.type INTEGER
+		comment.count 1
+		comment.range '0 - 255'
+		comment.dbmin 0
+		comment.dbmax 4590
+		iface MIXER
+		name 'Mic Playback Volume'
+		value 0
+	}
+	control.3 {
+		comment.access 'read write'
+		comment.type BOOLEAN
+		comment.count 1
+		iface MIXER
+		name 'Speaker Playback Switch'
+		value true
+	}
+	control.4 {
+		comment.access 'read write'
+		comment.type INTEGER
+		comment.count 2
+		comment.range '0 - 255'
+		comment.dbmin 0
+		comment.dbmax 4590
+		iface MIXER
+		name 'Speaker Playback Volume'
+		value.0 0
+		value.1 0
+	}
+	control.5 {
+		comment.access 'read write'
+		comment.type BOOLEAN
+		comment.count 1
+		iface MIXER
+		name 'Speaker Playback Switch'
+		index 1
+		value true
+	}
+	control.6 {
+		comment.access 'read write'
+		comment.type INTEGER
+		comment.count 1
+		comment.range '0 - 255'
+		comment.dbmin -4787
+		comment.dbmax -197
+		iface MIXER
+		name 'Speaker Playback Volume'
+		index 1
+		value <%= @alsa_speaker_playback_volume %>
+	}
+	control.7 {
+		comment.access 'read write'
+		comment.type BOOLEAN
+		comment.count 1
+		iface MIXER
+		name 'Mic Capture Switch'
+		value false
+	}
+	control.8 {
+		comment.access 'read write'
+		comment.type INTEGER
+		comment.count 1
+		comment.range '0 - 128'
+		comment.dbmin -18
+		comment.dbmax 2286
+		iface MIXER
+		name 'Mic Capture Volume'
+		value 0
+	}
+	control.9 {
+		comment.access 'read write'
+		comment.type BOOLEAN
+		comment.count 1
+		iface MIXER
+		name 'Auto Gain Control'
+		value false
+	}
+	control.10 {
+		comment.access 'read write'
+		comment.type BOOLEAN
+		comment.count 1
+		iface MIXER
+		name 'PCM Capture Switch'
+		value true
+	}
+	control.11 {
+		comment.access 'read write'
+		comment.type INTEGER
+		comment.count 2
+		comment.range '0 - 128'
+		comment.dbmin -18
+		comment.dbmax 2286
+		iface MIXER
+		name 'PCM Capture Volume'
+		value.0 <%= @alsa_pcm_capture_volume -%>
+		value.1 <%= @alsa_pcm_capture_volume -%>
+	}
+	control.12 {
+		comment.access 'read write'
+		comment.type ENUMERATED
+		comment.count 1
+		comment.item.0 Mic
+		comment.item.1 'Input 1'
+		iface MIXER
+		name 'PCM Capture Source'
+		value 'Input 1'
+	}
+}

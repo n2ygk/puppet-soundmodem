@@ -1,5 +1,5 @@
 class soundmodem::config inherits soundmodem {
-  file { '/etc/asound.state':
+  file { '/var/lib/alsa/asound.state':
     ensure  => file,
     owner   => 0,
     group   => 0,
