@@ -12,7 +12,7 @@
 # [*pttdev*]
 #   Push-to-talk (transmit) device. Default '/dev/ttyS0'
 #   
-# [*call*]
+# [*callsign*]
 #   Amateur radio AX.25 call sign.
 #
 # [*audio_type*]
@@ -32,7 +32,7 @@
 # === Examples
 #
 #  class { 'soundmodem':
-#    call                         => 'N0NE-15',
+#    callsign                     => 'N0NE-15',
 #    alsa_speaker_playback_volume => 12,
 #  }
 #
@@ -47,7 +47,7 @@
 class soundmodem (
   $intf                         = $soundmodem::params::intf,
   $pttdev                       = $soundmodem::params::pttdev,
-  $call                         = $soundmodem::params::call,
+  $callsign                     = $soundmodem::params::callsign,
   $audio_type                   = $soundmodem::params::audio_type,
   $alsa_dev                     = $soundmodem::params::alsa_dev,
   $alsa_speaker_playback_volume = $soundmodem::params::alsa_speaker_playback_volume,
@@ -55,7 +55,7 @@ class soundmodem (
 ) inherits soundmodem::params {
   validate_string($intf)
   validate_absolute_path($pttdev)
-  validate_string($call)
+  validate_string($callsign)
   validate_re($audio_type, '^alsa$', 'Only supported audio type is "alsa"')
   validate_string($alsa_dev)
   validate_integer($alsa_speaker_playback_volume)
