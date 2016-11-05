@@ -6,8 +6,10 @@ class soundmodem::config inherits soundmodem {
     mode    => '0644',
     content => template('soundmodem/asound.state.erb'),
   }
-  file { '/etc/ax25':
-    ensure  => directory,
+  if !File['/etc/ax25'] {
+    file { '/etc/ax25':
+      ensure  => directory,
+    }
   }
   file { '/etc/ax25/soundmodem.conf':
     ensure  => file,
